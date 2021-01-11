@@ -1,0 +1,24 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+#drawing {
+  width: 55%;
+  float: left;
+  height: 100%;
+  margin: 0px;
+}
+
+#info {
+  width: 45%;
+  height: 97vh;
+  float: right;
+  margin: 0%;
+  background-color: #394df1;
+  padding: 50px;
+  box-sizing: border-box;
+  opacity: 0;
+  position: relative;
+}
