@@ -1,3 +1,29 @@
+/**
+ * example arena code here: https://github.com/SFPC/code-societies/blob/master/index.html
+ * and here: https://github.com/DigitalLoveLanguages/digitallovelanguages.github.io/blob/master/script.js
+ */
+
+
+
+$(document).ready(function() {
+    console.log("ready!");
+    const axiosArena = axios.create({
+        baseURL: "https://api.are.na/v2/",
+    });
+
+    axiosArena.defaults.headers.Authorization = 'Bearer ---';
+    axiosArena.get("channels/looks-cybernetics-of-sex-plt4fxfg0o8?per=100").then(response => {
+        console.log(response);
+
+    });
+
+
+});
+
+
+
+
+// -------------------------------
 class Circle {
     constructor() {
         this.x = randomRange(50, 950);
