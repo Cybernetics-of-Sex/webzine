@@ -1,12 +1,99 @@
-/**
+/*
  * example arena code here: https://github.com/SFPC/code-societies/blob/master/index.html
  * and here: https://github.com/DigitalLoveLanguages/digitallovelanguages.github.io/blob/master/script.js
  */
 
+const iconsWrapper = document.getElementById("icons");
+const loadingWrapper = document.getElementById("loading-wrapper");
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
+
+function randomIntFromInterval(min, max) { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// function to get a sample of size numElements from an array
+function getRandomElementsFromArray(array, numElements) {
+    var arr = [];
+    const toReturn = []
+    while (arr.length < numElements) {
+        var r = randomIntFromInterval(0, array.length)
+        if (arr.indexOf(r) === -1) {
+            arr.push(r);
+            toReturn.push(array[r]);
+        }
+    }
+    return toReturn;
+}
+
+
+function placeIcons(arenaBlocks) {
+    // first lets randomly shuffle the blocks, so they are not always in the same order
+    shuffle(arenaBlocks);
+    // then lets loop through them
+    for (let i = 0; i < arenaBlocks.length; i++) {
+        //create block
+        let block = document.createElement("div");
+        block.className = "block";
+
+        //create image
+        if (arenaBlocks[i].image) {
+            var randWidth = randomIntFromInterval(80, 500)
+            const image = document.createElement("img");
+            var randomClass = "";
+            if (i % 6 === 0) {
+                randomClass = " random";
+            } else {
+                randomClass = "";
+            }
+
+            image.className = ("image iconImage" + randomClass);
+
+            // console.log(arenaBlocks[i].image.original.url);
+            image.src = arenaBlocks[i].image.original.url;
+            $(image).width(randWidth);
+
+            // move the blob by a random position to make things a bit less grid-like
+            // this delta number should be bigger and smaller depending on screen width
+            var delta = 700;
+            // var moveLeftPixels = randomIntFromInterval(0, 3000);
+            // var moveTopPixels = randomIntFromInterval(200, 8000);
+            var moveLeftPixels = randomIntFromInterval(0, (delta * 1.2));
+            var moveTopPixels = randomIntFromInterval(0, delta / 2);
+            $(block).css({
+                'left': moveLeftPixels,
+                'top': moveTopPixels
+            });
+
+            // append to html
+            block.appendChild(image);
+        }
+        //   var linksWrapper = document.createElement("div");
+        //   linksWrapper.className = "linkswrapper"
+        //   block.appendChild(linksWrapper);
+
+        iconsWrapper.appendChild(block);
+    }
+}
 
 
 $(document).ready(function() {
     console.log("ready!");
+    let cyberSexIcons = [];
+    let loading = document.createElement("div");
+    loading.className = "loading";
+    loading.innerHTML = 'loading...';
+    loadingWrapper.appendChild(loading);
+
     const axiosArena = axios.create({
         baseURL: "https://api.are.na/v2/",
     });
@@ -14,8 +101,24 @@ $(document).ready(function() {
     axiosArena.defaults.headers.Authorization = 'Bearer ---';
     axiosArena.get("channels/looks-cybernetics-of-sex-plt4fxfg0o8?per=100").then(response => {
         console.log(response);
+        if (response.data && response.data.contents.length > 1) {
+            loadingWrapper.removeChild(loading);
+
+            let arenaBlocks = [];
+            for (let i = 0; i < response.data.contents.length; i++) {
+                let j = i % response.data.contents.length;
+                // then add to the list of blocks
+                arenaBlocks.push(response.data.contents[j])
+            }
+            console.log(arenaBlocks)
+            placeIcons(arenaBlocks);
+        }
+
 
     });
+
+
+
 
 
 });
@@ -128,7 +231,7 @@ function animateLines(event) {
         let dist = distance(mouseX, mouseY, circle.x, circle.y)
 
         if (dist < circle.r + 10) {
-            console.log(circle.animatedpaths);
+            // console.log(circle.animatedpaths);
             for (let p in circle.lines) {
                 circle.lines[p].animate(randomRange(1000, 2000))
                     .ease("<>")
