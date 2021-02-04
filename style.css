@@ -45,6 +45,9 @@ a:hover {
 
 .random {
     mix-blend-mode: unset !important;
+    -moz-box-shadow: 11px 12px 13px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 11px 12px 13px rgba(0, 0, 0, .5);
+    box-shadow: 11px 12px 13px rgba(0, 0, 0, .5);
 }
 
 #icons {
@@ -89,6 +92,7 @@ a:hover {
 .iconImage {
     z-index: 5;
     mix-blend-mode: color-burn;
+    border-radius: 50%;
 }
 
 .iconImage:hover {

@@ -61,6 +61,7 @@ function placeIcons(arenaBlocks) {
             // console.log(arenaBlocks[i].image.original.url);
             image.src = arenaBlocks[i].image.original.url;
             $(image).width(randWidth);
+            $(image).height(randWidth);
 
             // move the blob by a random position to make things a bit less grid-like
             // this delta number should be bigger and smaller depending on screen width
