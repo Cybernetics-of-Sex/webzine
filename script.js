@@ -52,55 +52,55 @@ function getRandomElementsFromArray(array, numElements) {
     return toReturn;
 }
 
-function placeIcons(arenaBlocks) {
-    // first lets randomly shuffle the blocks, so they are not always in the same order
-    shuffle(arenaBlocks);
-    // then lets loop through them
-    for (let i = 0; i < arenaBlocks.length; i++) {
-        //create block
-        let block = document.createElement("div");
-        block.className = "block";
+// function placeIcons(arenaBlocks) {
+//     // first lets randomly shuffle the blocks, so they are not always in the same order
+//     shuffle(arenaBlocks);
+//     // then lets loop through them
+//     for (let i = 0; i < arenaBlocks.length; i++) {
+//         //create block
+//         let block = document.createElement("div");
+//         block.className = "block";
 
-        //create image
-        if (arenaBlocks[i].image) {
-            var randWidth = randomIntFromInterval(80, 500);
-            const image = document.createElement("img");
-            var randomClass = "";
-            if (i % 6 === 0) {
-                randomClass = " random";
-            } else {
-                randomClass = "";
-            }
+//         //create image
+//         if (arenaBlocks[i].image) {
+//             var randWidth = randomIntFromInterval(80, 500);
+//             const image = document.createElement("img");
+//             var randomClass = "";
+//             if (i % 6 === 0) {
+//                 randomClass = " random";
+//             } else {
+//                 randomClass = "";
+//             }
 
-            image.className = "image iconImage" + randomClass;
+//             image.className = "image iconImage" + randomClass;
 
-            // console.log(arenaBlocks[i].image.original.url);
-            image.src = arenaBlocks[i].image.original.url;
-            $(image).width(randWidth);
-            $(image).height(randWidth);
+//             // console.log(arenaBlocks[i].image.original.url);
+//             image.src = arenaBlocks[i].image.original.url;
+//             $(image).width(randWidth);
+//             $(image).height(randWidth);
 
-            // move the blob by a random position to make things a bit less grid-like
-            // this delta number should be bigger and smaller depending on screen width
-            var delta = 700;
-            // var moveLeftPixels = randomIntFromInterval(0, 3000);
-            // var moveTopPixels = randomIntFromInterval(200, 8000);
-            var moveLeftPixels = randomIntFromInterval(0, delta * 1.2);
-            var moveTopPixels = randomIntFromInterval(0, delta / 2);
-            $(block).css({
-                left: moveLeftPixels,
-                top: moveTopPixels,
-            });
+//             // move the blob by a random position to make things a bit less grid-like
+//             // this delta number should be bigger and smaller depending on screen width
+//             var delta = 700;
+//             // var moveLeftPixels = randomIntFromInterval(0, 3000);
+//             // var moveTopPixels = randomIntFromInterval(200, 8000);
+//             var moveLeftPixels = randomIntFromInterval(0, delta * 1.2);
+//             var moveTopPixels = randomIntFromInterval(0, delta / 2);
+//             $(block).css({
+//                 left: moveLeftPixels,
+//                 top: moveTopPixels,
+//             });
 
-            // append to html
-            block.appendChild(image);
-        }
-        //   var linksWrapper = document.createElement("div");
-        //   linksWrapper.className = "linkswrapper"
-        //   block.appendChild(linksWrapper);
+//             // append to html
+//             block.appendChild(image);
+//         }
+//         //   var linksWrapper = document.createElement("div");
+//         //   linksWrapper.className = "linkswrapper"
+//         //   block.appendChild(linksWrapper);
 
-        iconsWrapper.appendChild(block);
-    }
-}
+//         iconsWrapper.appendChild(block);
+//     }
+// }
 
 $(document).ready(function() {
     console.log("ready!");
@@ -116,7 +116,7 @@ $(document).ready(function() {
 
     axiosArena.defaults.headers.Authorization = "Bearer ---";
     axiosArena
-        .get("channels/looks-cybernetics-of-sex-plt4fxfg0o8?per=100")
+        .get("channels/looks-cybernetics-of-sex?per=100")
         .then((response) => {
             let arenaBlocks = [];
             // console.log(response);
