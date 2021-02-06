@@ -3,6 +3,8 @@
  * and here: https://github.com/DigitalLoveLanguages/digitallovelanguages.github.io/blob/master/script.js
  */
 
+// import { SVG } from "@svgdotjs/svg.js";
+
 /* Helper Functions */
 
 function random(num) {
@@ -174,6 +176,14 @@ class Circle {
     //  mask the image with ellipse
     let mask = draw.mask().add(ellipse);
     circle.maskWith(mask);
+    // here goes the filter that applies to the image
+
+    // for randomness -> set a random chance variable
+    // and set if(randomChance < 0.3) do this else do that
+
+    // circle.filterWith(function (add) {
+    //   add.colorMatrix("hueRotate", 180);
+    // });
 
     circle.on("click", function () {
       if (!displaying) {
