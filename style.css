@@ -1,79 +1,80 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 20px;
-  color: black;
-  background-color: darkseagreen;
-  padding: 20px;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  /* cursor: grab;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 20px;
+    color: black;
+    background-color: #f1f1f1;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    /* cursor: grab;
     cursor: -o-grab;
     cursor: -moz-grab;
     cursor: -webkit-grab; */
 }
 
 a:visited {
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 #drawing {
-  width: 1000px;
-  height: 500px;
-  margin: 0px;
+    width: 1000px;
+    height: 500px;
+    margin: 0px;
 }
 
 #info {
-  width: 90%;
-  /* margin: 5%; */
-  margin-top: 0px;
-  height: 200px;
-  background-color: #394df1;
-  padding: 50px;
-  box-sizing: border-box;
-  opacity: 0;
+    width: 90%;
+    /* margin: 5%; */
+    margin-top: 0px;
+    height: 200px;
+    background-color: #394df1;
+    padding: 50px;
+    box-sizing: border-box;
+    opacity: 0;
 }
 
 .loading {
-  background-color: goldenrod;
+    background-color: goldenrod;
 }
 
 .random {
-  mix-blend-mode: unset !important;
-  -moz-box-shadow: 11px 12px 13px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 11px 12px 13px rgba(0, 0, 0, 0.5);
-  box-shadow: 11px 12px 13px rgba(0, 0, 0, 0.5);
+    mix-blend-mode: unset !important;
+    -moz-box-shadow: 11px 12px 13px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 11px 12px 13px rgba(0, 0, 0, 0.5);
+    box-shadow: 11px 12px 13px rgba(0, 0, 0, 0.5);
 }
 
 #icons {
-  /* margin-top: -20em; */
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  flex-direction: column;
-  flex-wrap: wrap;
+    /* margin-top: -20em; */
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .block img {
-  margin: 0 0px 10px 0px;
+    margin: 0 0px 10px 0px;
 }
 
 .block,
 .channel {
-  padding: 15px;
-  align-items: stretch;
-  justify-content: center;
-  flex-direction: column;
-  border: none !important;
-  font-size: 1.325em !important;
-  position: relative;
-  height: 400px;
+    padding: 15px;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    border: none !important;
+    font-size: 1.325em !important;
+    position: relative;
+    height: 400px;
 }
+
 
 /* a.block, a.channel {
     cursor: pointer;
@@ -89,15 +90,19 @@ a:hover {
   } */
 
 .iconImage {
-  z-index: 5;
-  mix-blend-mode: color-burn;
-  border-radius: 50%;
+    z-index: 5;
+    mix-blend-mode: color-burn;
+    border-radius: 50%;
 }
 
 .iconImage:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
+
+
 /* this will create full screen but cause mouse x and y not working */
+
+
 /* #drawing {
   width: 100vw;
   height: 100vh;
