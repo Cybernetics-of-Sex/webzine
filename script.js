@@ -190,7 +190,7 @@ class Circle {
         circle.filterWith(function(add) {
             // add.colorMatrix("hueRotate", 180);
 
-            add.colorMatrix('matrix', [1.0, 0, 0, 0, 0, 0, 0.2, 0, 0, 0, 0, 0, 0.2, 0, 0, 0, 0, 0, 1.0, 0])
+            add.colorMatrix('matrix', [1.0, 0, 0, 0, 0, 0, 0.24, 0, 0, 0, 0, 0, 0.39, 0, 0, 0, 0, 0, 1.0, 0])
         });
 
         circle.on("click", function() {
@@ -219,8 +219,8 @@ class Circle {
                     let path = draw.path(pathstring);
                     path.fill("none");
                     path.stroke({
-                        color: "#394DF1",
-                        width: 2,
+                        color: "#dddaf1",
+                        width: 0.7,
                         linecap: "round",
                         linejoin: "round",
                     });
