@@ -24,19 +24,27 @@ a:hover {
 
 #drawing {
     width: 1000px;
-    height: 500px;
-    margin: 0px;
+    height: 700px;
+    margin: auto;
+    color: white;
+    font-size: 20px;
+    position: fixed;
 }
 
 #info {
-    width: 90%;
+    width: 300px;
     /* margin: 5%; */
-    margin-top: 0px;
-    height: 200px;
-    background-color: #394df1;
+    margin-top: 30px;
+    height: 500px;
+    right: 0px;
+    margin-right:50px;
+    background-color: white;
+    color: palevioletred;
     padding: 50px;
     box-sizing: border-box;
     opacity: 0;
+    position: fixed;
+    border-radius: 50px;
 }
 
 .loading {

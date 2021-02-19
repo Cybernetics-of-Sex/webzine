@@ -160,7 +160,7 @@ $(document).ready(function() {
 class Circle {
     constructor(path) {
         this.x = randomRange(50, 950);
-        this.y = randomRange(50, 450);
+        this.y = randomRange(50, 650);
         this.r = randomRange(10, 30);
         this.path = path;
         this.lines = [];
@@ -217,13 +217,28 @@ class Circle {
                     let pathvals = createPath(this.x, this.y, circle.x, circle.y);
                     let pathstring = makePathString(pathvals);
                     let path = draw.path(pathstring);
+                    
+                    // make string to display along path
+                    
+                    // use line of code below to have different symbols
+                    // let symbolNum = randomRange(0, pathSymbols.length);
+                    
+                    // use this line of code if you want to specify just one symbol
+                    let symbolNum = 2;
+                    
+                    let pathtext = pathSymbols[symbolNum].concat(" ").repeat(5);
+                    
+                    let textpath = path.text(pathtext.repeat(path.length()/10)).font({fill:"#ffffff"});
+                    
                     path.fill("none");
+                    
                     path.stroke({
                         color: "#dddaf1",
                         width: 0.7,
                         linecap: "round",
                         linejoin: "round",
                     });
+                    path.stroke("none");
 
                     let animatedpathvals = createPath(this.x, this.y, circle.x, circle.y);
 
@@ -238,12 +253,15 @@ class Circle {
 }
 
 // let draw = SVG().addTo("#drawing").viewbox(0, 0, 1000, 500);
-let draw = SVG().addTo("#drawing").viewbox(0, 0, 1010, 666);
+let draw = SVG().addTo("#drawing").viewbox(0, 0, 1000, 700);
 
 let drawing = document.getElementById("drawing");
 
 let allCircles = [];
 let displaying = false;
+
+// add more symbols here!!!
+let pathSymbols = ["-", "*", "'", "&", "+"];
 
 function createPath(c1x, c1y, c2x, c2y) {
     let path = [
