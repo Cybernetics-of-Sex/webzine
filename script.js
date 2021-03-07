@@ -19,6 +19,26 @@ function distance(aX, aY, bX, bY) {
     return Math.sqrt(Math.pow(aX - bX, 2) + Math.pow(aY - bY, 2));
 }
 
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
 /* ****************************** */
 
 const iconsWrapper = document.getElementById("icons");
@@ -54,55 +74,7 @@ function getRandomElementsFromArray(array, numElements) {
     return toReturn;
 }
 
-// function placeIcons(arenaBlocks) {
-//     // first lets randomly shuffle the blocks, so they are not always in the same order
-//     shuffle(arenaBlocks);
-//     // then lets loop through them
-//     for (let i = 0; i < arenaBlocks.length; i++) {
-//         //create block
-//         let block = document.createElement("div");
-//         block.className = "block";
 
-//         //create image
-//         if (arenaBlocks[i].image) {
-//             var randWidth = randomIntFromInterval(80, 500);
-//             const image = document.createElement("img");
-//             var randomClass = "";
-//             if (i % 6 === 0) {
-//                 randomClass = " random";
-//             } else {
-//                 randomClass = "";
-//             }
-
-//             image.className = "image iconImage" + randomClass;
-
-//             // console.log(arenaBlocks[i].image.original.url);
-//             image.src = arenaBlocks[i].image.original.url;
-//             $(image).width(randWidth);
-//             $(image).height(randWidth);
-
-//             // move the blob by a random position to make things a bit less grid-like
-//             // this delta number should be bigger and smaller depending on screen width
-//             var delta = 700;
-//             // var moveLeftPixels = randomIntFromInterval(0, 3000);
-//             // var moveTopPixels = randomIntFromInterval(200, 8000);
-//             var moveLeftPixels = randomIntFromInterval(0, delta * 1.2);
-//             var moveTopPixels = randomIntFromInterval(0, delta / 2);
-//             $(block).css({
-//                 left: moveLeftPixels,
-//                 top: moveTopPixels,
-//             });
-
-//             // append to html
-//             block.appendChild(image);
-//         }
-//         //   var linksWrapper = document.createElement("div");
-//         //   linksWrapper.className = "linkswrapper"
-//         //   block.appendChild(linksWrapper);
-
-//         iconsWrapper.appendChild(block);
-//     }
-// }
 
 $(document).ready(function() {
     console.log("ready!");
@@ -118,7 +90,7 @@ $(document).ready(function() {
 
     axiosArena.defaults.headers.Authorization = "Bearer ---";
     axiosArena
-        .get("channels/looks-cybernetics-of-sex?per=100")
+        .get("channels/textures-fqn0veaotdq?per=100")
         .then((response) => {
             let arenaBlocks = [];
             // console.log(response);
@@ -151,22 +123,134 @@ $(document).ready(function() {
                     c.drawCircle();
                 }
             }
+
+
+            getBlocksPool();
+
+
+
+            //               // after placing the blocks, we add the click function
+            //   // (html elements need to exist on the page before a click function can be added)
+            //   $('.blobImage').click(function(e) {
+            //     e.preventDefault();
+            //     console.log('++ blob clicked');
+            //     // find parent block
+            //     var parentBlock = $(this).parent('.block');
+            //     var linksWrapper = parentBlock.find('.linkswrapper');
+            //     // toggle visibility of links wrapper
+            //     linksWrapper.toggle();
+            //     // if linksWrapper is empty, then add blocks to it
+            //     if ($(linksWrapper).is(':empty')) {
+            //       // also select three random blocks to put in linkswrapper
+            //       var randomSample = getRandomElementsFromArray(availableBlocks, 3);
+            //       // clear links wrapper
+            //       populateArenaPopup(linksWrapper, randomSample);
+            //     }
+            //   });
+
+
+
+
         });
+
+    let availableBlocks = []
+        // this function prefetches all the blocks from arena that will be displayed in popups
+        // so that when someone clicks a blob, no requests to the arena API are needed
+    function getBlocksPool() {
+        const listOfChannels = [
+            // 'webzine-landscape-blob-pngs',
+            'projects-ephemera',
+            'when-do-you-wish-you-had-not-remained-silent',
+            'what-do-you-need-to-say',
+            'what-are-the-tyrannies-big-and-small-that-you-swallow-day-by-day-and-attempt-to-make-your-own',
+            'if-we-have-been-socialized-to-respect-fear-more-than-our-own-need-for-language-ask-yourself-what-s-the-worst-that-could-happen-t'
+        ];
+
+        let completedRequests = 0;
+
+        for (let i = 0; i < listOfChannels.length; i++) {
+            var channel = listOfChannels[i];
+            var channelUrl = "channels/" + channel + "?per=100"
+            console.log('++ fetching blocks from ' + channel);
+            axiosArena.get(channelUrl).then(response => {
+                // console.log(response);
+                if (response.data && response.data.contents.length > 1) {
+                    for (let i = 0; i < response.data.contents.length; i++) {
+                        // set the channel title to be part of the block so we can access it later
+                        response.data.contents[i].channelTitle = response.data.title;
+                        response.data.contents[i].channelSlug = response.data.slug;
+                        // then add it to the queue
+                        availableBlocks.push(response.data.contents[i])
+                            // console.log(availableBlocks);
+                    }
+                }
+
+                completedRequests += 1;
+                if (completedRequests == listOfChannels.length) {
+                    assignBlocksToCircles();
+                }
+            });
+
+        }
+    }
+
+
+
+    function assignBlocksToCircles() {
+        // make a function
+        // sort avail blocks randomly
+        shuffle(availableBlocks);
+        console.log("!!!");
+        // iterate throigh all the circles (102) and assign an available pool block to them
+        console.log(availableBlocks);
+
+        for (i = 0; i < allCircles.length; i++) {
+            // console.log(allCircles[i])
+            console.log(availableBlocks[i])
+
+
+            console.log("=======", availableBlocks[i].channelTitle)
+
+            allCircles[i].channelTitle = availableBlocks[i].channelTitle;
+            allCircles[i].title = availableBlocks[i].title;
+            allCircles[i].desc = availableBlocks[i].description;
+            allCircles[i].content = availableBlocks[i].content
+            if (availableBlocks[i].image != undefined) {
+                allCircles[i].image = availableBlocks[i].image.original.url;
+            }
+
+
+            console.log(allCircles[i])
+
+        }
+
+
+
+
+    }
+
 });
 
 
 
+// now availableBlocks is filled with blocks
+
 // -------------------------------
 class Circle {
+
+
     constructor(path) {
         this.x = randomRange(50, 950);
         this.y = randomRange(50, 650);
-        this.r = randomRange(10, 30);
+        this.r = randomRange(15, 30);
         this.path = path;
         this.lines = [];
         this.animatedpaths = [];
-        this.text = "content";
+        // this.text = "content";
+        //add arena caregories here;
     }
+
+
 
     drawCircle(path) {
         //draw ellipse mask shape
@@ -193,18 +277,30 @@ class Circle {
             add.colorMatrix('matrix', [1.0, 0, 0, 0, 0, 0, 0.24, 0, 0, 0, 0, 0, 0.39, 0, 0, 0, 0, 0, 1.0, 0])
         });
 
+        var self = this;
+
         circle.on("click", function() {
+            let channel = self.channelTitle;
+            let title = self.title;
+            let imageUrl = self.image;
+            let description = self.desc;
+            let content = self.content;
+            // let description = this.desc
+
             if (!displaying) {
                 displaying = true;
                 let n = randomRange(0, allCircles.length - 1);
                 document.querySelector("#info").innerHTML =
-                    "<h2>title</h2> <p> " + allCircles[n].text + "</p>";
+                    "<h1>" + channel + "</h1> <h2>" + title + "</h2> <img class='info-image' src=" + imageUrl + "> <p> " + content + "< /p> <p>" + description + "< /p>";
+
                 unfade(document.querySelector("#info"));
+
             } else {
                 displaying = false;
                 fade(document.querySelector("#info"));
             }
         });
+
     }
 
     createLines() {
@@ -217,21 +313,21 @@ class Circle {
                     let pathvals = createPath(this.x, this.y, circle.x, circle.y);
                     let pathstring = makePathString(pathvals);
                     let path = draw.path(pathstring);
-                    
+
                     // make string to display along path
-                    
+
                     // use line of code below to have different symbols
-                    // let symbolNum = randomRange(0, pathSymbols.length);
-                    
+                    let symbolNum = randomRange(0, pathSymbols.length);
+
                     // use this line of code if you want to specify just one symbol
-                    let symbolNum = 2;
-                    
+                    // let symbolNum = 2;
+
                     let pathtext = pathSymbols[symbolNum].concat(" ").repeat(5);
-                    
-                    let textpath = path.text(pathtext.repeat(path.length()/10)).font({fill:"#ffffff"});
-                    
+
+                    let textpath = path.text(pathtext.repeat(path.length() / 10)).font({ fill: "#ffffff" });
+
                     path.fill("none");
-                    
+
                     path.stroke({
                         color: "#dddaf1",
                         width: 0.7,
@@ -261,7 +357,9 @@ let allCircles = [];
 let displaying = false;
 
 // add more symbols here!!!
-let pathSymbols = ["-", "*", "'", "&", "+"];
+// let pathSymbols = ["-", "*", "'", "⌾", "+"];
+// let pathSymbols = ["-", "-", "-", "-", "᠁"];
+let pathSymbols = ["‾"];
 
 function createPath(c1x, c1y, c2x, c2y) {
     let path = [
@@ -354,7 +452,7 @@ function fade(element) {
         element.style.opacity = op;
         element.style.filter = "alpha(opacity=" + op * 100 + ")";
         op -= op * 0.1;
-    }, 50);
+    }, 30);
 }
 
 function unfade(element) {
