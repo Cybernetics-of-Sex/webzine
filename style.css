@@ -1,5 +1,76 @@
+/* Reset Css */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 body {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* CSS starts from here */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+h1{
+    font-size: 1.7em;
+    margin: 1em 0;
+}
+h2{
+    font-size: 1.5em;
+}
+h3{
+    font-size: 1.2em;
+    margin: 0.8em 0;
+}
+
+p{
+    font-size: 1em;
+    margin: 1em 0;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+
+body {
+    /* font-family: "Helvetica Neue", Helvetica, sans-serif; */
+    font-family: 'Space Mono', monospace;
     font-size: 20px;
     color: black;
     background-color: #110000;
@@ -7,6 +78,7 @@ body {
     width: 100vw;
     height: 100vh;
     margin: 0;
+    font-size: 1em;
     /* cursor: grab;
     cursor: -o-grab;
     cursor: -moz-grab;
@@ -41,7 +113,7 @@ a:hover {
 }
 
 #info {
-    width: 300px;
+    width: 55vw;
     /* margin: 5%; */
     margin-top: 30px;
     height: 500px;
@@ -55,10 +127,11 @@ a:hover {
     position: fixed;
     /* border-radius: 50px; */
     border: dashed 1px;
+    overflow: auto;
 }
 
 .info-image {
-    width: 200px;
+    width: 100%;
 }
 
 .loading {
