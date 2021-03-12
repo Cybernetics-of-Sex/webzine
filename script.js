@@ -288,16 +288,19 @@ class Circle {
             // let description = this.desc
 
             if (!displaying) {
-                displaying = true;
                 let n = randomRange(0, allCircles.length - 1);
-                document.querySelector("#info").innerHTML =
+                
+                if (imageUrl) {
+                    document.querySelector("#info").innerHTML =
                     "<h3>" + channel + "</h3> <h1>" + title + "</h1> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
+                }
+                
+                else {
+                   document.querySelector("#info").innerHTML =
+                    "<h3>" + channel + "</h3> <h1>" + title + "</h1> <p> " + content + "</p> <p>" + description + "</p>"; 
+                }
 
                 unfade(document.querySelector("#info"));
-
-            } else {
-                displaying = false;
-                fade(document.querySelector("#info"));
             }
         });
 
@@ -441,6 +444,11 @@ function animateLines(event) {
 }
 
 drawing.addEventListener("mousemove", animateLines, false);
+drawing.addEventListener("click", function(event) {
+    if (displaying) {
+        fade(document.querySelector("#info"));
+    }
+});
 
 function fade(element) {
     var op = 1; // initial opacity
@@ -448,6 +456,7 @@ function fade(element) {
         if (op <= 0.1) {
             clearInterval(timer);
             element.style.display = "none";
+            displaying = false;
         }
         element.style.opacity = op;
         element.style.filter = "alpha(opacity=" + op * 100 + ")";
@@ -461,6 +470,7 @@ function unfade(element) {
     var timer = setInterval(function() {
         if (op >= 1) {
             clearInterval(timer);
+            displaying = true;
         }
         element.style.opacity = op;
         element.style.filter = "alpha(opacity=" + op * 100 + ")";
