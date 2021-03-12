@@ -291,7 +291,7 @@ class Circle {
                 displaying = true;
                 let n = randomRange(0, allCircles.length - 1);
                 document.querySelector("#info").innerHTML =
-                    "<h1>" + channel + "</h1> <h2>" + title + "</h2> <img class='info-image' src=" + imageUrl + "> <p> " + content + "< /p> <p>" + description + "< /p>";
+                    "<h1>" + channel + "</h1> <h2>" + title + "</h2> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
 
                 unfade(document.querySelector("#info"));
 
