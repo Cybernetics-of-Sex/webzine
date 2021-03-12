@@ -113,12 +113,12 @@ a:hover {
 }
 
 #info {
-    width: 55vw;
+    width: 40vw;
     /* margin: 5%; */
-    margin-top: 30px;
-    height: 500px;
+    /* margin-top: 30px; */
+    height: 65vh;
     right: 0px;
-    margin-right: 50px;
+    margin-right: 1em;
     background-color: rgba(0, 0, 0, 0.72);
     color: white;
     padding: 50px;
@@ -132,6 +132,8 @@ a:hover {
 
 .info-image {
     width: 100%;
+    padding-top: 1em;
+    border-top: 1px solid;
 }
 
 .loading {
