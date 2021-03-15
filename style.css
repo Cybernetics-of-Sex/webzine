@@ -79,6 +79,7 @@ body {
     height: 100vh;
     margin: 0;
     font-size: 1em;
+    overflow: hidden;
     /* cursor: grab;
     cursor: -o-grab;
     cursor: -moz-grab;
