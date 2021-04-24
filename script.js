@@ -41,6 +41,10 @@ function shuffle(array) {
 
 /* ****************************** */
 
+$("#about").click(function() {
+    $("#info-about").toggle();
+});
+
 const iconsWrapper = document.getElementById("icons");
 const loadingWrapper = document.getElementById("loading-wrapper");
 
@@ -162,6 +166,7 @@ $(document).ready(function() {
             'projects-ephemera',
             'when-do-you-wish-you-had-not-remained-silent',
             'what-do-you-need-to-say',
+            'open-questions-pjskriac1oa',
             'what-are-the-tyrannies-big-and-small-that-you-swallow-day-by-day-and-attempt-to-make-your-own',
             'if-we-have-been-socialized-to-respect-fear-more-than-our-own-need-for-language-ask-yourself-what-s-the-worst-that-could-happen-t'
         ];
@@ -206,21 +211,29 @@ $(document).ready(function() {
 
         for (i = 0; i < allCircles.length; i++) {
             // console.log(allCircles[i])
-            console.log(availableBlocks[i])
+            // console.log(availableBlocks[i])
 
 
-            console.log("=======", availableBlocks[i].channelTitle)
+            // console.log("=======", availableBlocks[i].channelTitle)
 
             allCircles[i].channelTitle = availableBlocks[i].channelTitle;
             allCircles[i].title = availableBlocks[i].title;
             allCircles[i].desc = availableBlocks[i].description;
             allCircles[i].content = availableBlocks[i].content
+            if (availableBlocks[i].source != undefined) {
+                allCircles[i].link = availableBlocks[i].source.url
+            } else {
+                allCircles[i].link = "";
+            }
+            // allCircles[i].link = availableBlocks[i].source.url
+            // console.log(allCircles[i].link);
+            // console.log(availableBlocks[i], "this check");
             if (availableBlocks[i].image != undefined) {
                 allCircles[i].image = availableBlocks[i].image.original.url;
             }
 
 
-            console.log(allCircles[i])
+            // console.log(allCircles[i])
 
         }
 
@@ -279,29 +292,38 @@ class Circle {
 
         var self = this;
 
+        // arenaBlocks[i].source.url
+
         circle.on("click", function() {
             let channel = self.channelTitle;
             let title = self.title;
             let imageUrl = self.image;
             let description = self.desc;
             let content = self.content;
+            let url = self.link;
             // let description = this.desc
 
             if (!displaying) {
                 let n = randomRange(0, allCircles.length - 1);
-                
+
                 if (imageUrl) {
                     document.querySelector("#info").innerHTML =
-                    "<h3>" + channel + "</h3> <h1>" + title + "</h1> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
+                        "<h3>" + channel + "</h3> <a href='" + url + "' target='_blank'> <h1>" + title + "</h1></a> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
+
+                } else {
+                    document.querySelector("#info").innerHTML =
+                        "<h3>" + channel + "</h3> <h1>" + title + "</h1> <p> " + content + "</p> <p>" + description + "</p>";
                 }
-                
-                else {
-                   document.querySelector("#info").innerHTML =
-                    "<h3>" + channel + "</h3> <h1>" + title + "</h1> <p> " + content + "</p> <p>" + description + "</p>"; 
+
+                if (imageUrl && url == "") {
+                    document.querySelector("#info").innerHTML =
+                        "<h3>" + channel + "</h3> <h1>" + title + "</h1> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
                 }
 
                 unfade(document.querySelector("#info"));
             }
+
+
         });
 
     }
