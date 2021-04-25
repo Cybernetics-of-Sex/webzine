@@ -301,10 +301,10 @@ class Circle {
             let description = self.desc;
             let content = self.content;
             let url = self.link;
+            circleclick = true;
             // let description = this.desc
-
-            if (!displaying) {
-                let n = randomRange(0, allCircles.length - 1);
+            
+            let n = randomRange(0, allCircles.length - 1);
 
                 if (imageUrl) {
                     document.querySelector("#info").innerHTML =
@@ -320,7 +320,10 @@ class Circle {
                         "<h3>" + channel + "</h3> <h1>" + title + "</h1> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
                 }
 
+            if (!displaying) {
+                
                 unfade(document.querySelector("#info"));
+                circleclick = false;
             }
 
 
@@ -380,6 +383,7 @@ let drawing = document.getElementById("drawing");
 
 let allCircles = [];
 let displaying = false;
+let circleclick = false;
 
 // add more symbols here!!!
 // let pathSymbols = ["-", "*", "'", "⌾", "+"];
@@ -468,7 +472,12 @@ function animateLines(event) {
 drawing.addEventListener("mousemove", animateLines, false);
 drawing.addEventListener("click", function(event) {
     if (displaying) {
-        fade(document.querySelector("#info"));
+        if (!circleclick) {
+            fade(document.querySelector("#info"));
+        }
+        else {
+            circleclick = false;
+        }
     }
 });
 
