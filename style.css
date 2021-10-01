@@ -197,6 +197,7 @@ a:hover {
     font-size: 20px;
     position: fixed;
     padding: 20px;
+    margin-top: .3em;
 }
 
 #drawing-wrapper {
@@ -238,6 +239,7 @@ a:hover {
     border: dashed 1px;
     overflow: auto;
     margin: 20px;
+    margin-top: 3em;
 }
 
 #info-about a {
@@ -249,14 +251,14 @@ i {
 }
 
 #about {
-    font-size: 3em;
-    background-color: brown;
-    width: 100vw;
-    POSITION: bottom;
-    top: 100;
-    bottom: 0;
-    position: fixed;
-    text-align: center;
+      font-size: 1.5em;
+      background-color: brown;
+      width: 100vw;
+      POSITION: bottom;
+      top: 100;
+      top: 0;
+      position: fixed;
+      text-align: center;
 }
 
 #about:hover {
