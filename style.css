@@ -208,8 +208,8 @@ a:hover {
 }
 
 #info {
-    width: 40vw;
-    height: 65vh;
+    width: 42vw;
+    height: 40vh;
     right: 0px;
     margin-right: 1em;
     background-color: rgba(0, 0, 0, 0.72);
@@ -221,6 +221,7 @@ a:hover {
     border: dashed 1px;
     overflow: auto;
     margin: 30px;
+    top: 2em;
 }
 
 #info-about {
