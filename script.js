@@ -21,11 +21,11 @@ function distance(aX, aY, bX, bY) {
 
 function shuffle(array) {
     var currentIndex = array.length,
-        temporaryValue, randomIndex;
+        temporaryValue,
+        randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -41,7 +41,7 @@ function shuffle(array) {
 
 /* ****************************** */
 
-$("#about").click(function() {
+$("#about").click(function () {
     $("#info-about").toggle();
 });
 
@@ -78,9 +78,7 @@ function getRandomElementsFromArray(array, numElements) {
     return toReturn;
 }
 
-
-
-$(document).ready(function() {
+$(document).ready(function () {
     console.log("ready!");
     // let cyberSexIcons = [];
     let loading = document.createElement("div");
@@ -93,100 +91,93 @@ $(document).ready(function() {
     });
 
     axiosArena.defaults.headers.Authorization = "Bearer ---";
-    axiosArena
-        .get("channels/textures-fqn0veaotdq?per=100")
-        .then((response) => {
-            let arenaBlocks = [];
-            // console.log(response);
-            if (response.data && response.data.contents.length > 1) {
-                loadingWrapper.removeChild(loading);
-                for (let i = 0; i < response.data.contents.length; i++) {
-                    let j = i % response.data.contents.length;
-                    // then add to the list of blocks
-                    arenaBlocks.push(response.data.contents[j]);
-                }
-                console.log(arenaBlocks);
-                // placeIcons(arenaBlocks);
+    axiosArena.get("channels/textures-fqn0veaotdq?per=100").then((response) => {
+        let arenaBlocks = [];
+        // console.log(response);
+        if (response.data && response.data.contents.length > 1) {
+            loadingWrapper.removeChild(loading);
+            for (let i = 0; i < response.data.contents.length; i++) {
+                let j = i % response.data.contents.length;
+                // then add to the list of blocks
+                arenaBlocks.push(response.data.contents[j]);
+            }
+            console.log(arenaBlocks);
+            // placeIcons(arenaBlocks);
 
-                // draw images when blocks are ready
-                for (let i = 0; i < arenaBlocks.length; i++) {
-                    if (
-                        arenaBlocks[i].image === undefined ||
-                        arenaBlocks[i].image === null
-                    ) {
-                        continue;
-                    } else {
-                        c = new Circle(arenaBlocks[i].image.square.url);
-                        c.createLines();
-                        // c.drawCircle();
-                        allCircles.push(c);
-                    }
-                }
-                // circle will be drawn after lines so it will be on top of it
-                for (let c of allCircles) {
-                    c.drawCircle();
+            // draw images when blocks are ready
+            for (let i = 0; i < arenaBlocks.length; i++) {
+                if (
+                    arenaBlocks[i].image === undefined ||
+                    arenaBlocks[i].image === null
+                ) {
+                    continue;
+                } else {
+                    c = new Circle(arenaBlocks[i].image.square.url);
+                    c.createLines();
+                    // c.drawCircle();
+                    allCircles.push(c);
                 }
             }
+            // circle will be drawn after lines so it will be on top of it
+            for (let c of allCircles) {
+                c.drawCircle();
+            }
+        }
 
+        getBlocksPool();
 
-            getBlocksPool();
+        //               // after placing the blocks, we add the click function
+        //   // (html elements need to exist on the page before a click function can be added)
+        //   $('.blobImage').click(function(e) {
+        //     e.preventDefault();
+        //     console.log('++ blob clicked');
+        //     // find parent block
+        //     var parentBlock = $(this).parent('.block');
+        //     var linksWrapper = parentBlock.find('.linkswrapper');
+        //     // toggle visibility of links wrapper
+        //     linksWrapper.toggle();
+        //     // if linksWrapper is empty, then add blocks to it
+        //     if ($(linksWrapper).is(':empty')) {
+        //       // also select three random blocks to put in linkswrapper
+        //       var randomSample = getRandomElementsFromArray(availableBlocks, 3);
+        //       // clear links wrapper
+        //       populateArenaPopup(linksWrapper, randomSample);
+        //     }
+        //   });
+    });
 
-
-
-            //               // after placing the blocks, we add the click function
-            //   // (html elements need to exist on the page before a click function can be added)
-            //   $('.blobImage').click(function(e) {
-            //     e.preventDefault();
-            //     console.log('++ blob clicked');
-            //     // find parent block
-            //     var parentBlock = $(this).parent('.block');
-            //     var linksWrapper = parentBlock.find('.linkswrapper');
-            //     // toggle visibility of links wrapper
-            //     linksWrapper.toggle();
-            //     // if linksWrapper is empty, then add blocks to it
-            //     if ($(linksWrapper).is(':empty')) {
-            //       // also select three random blocks to put in linkswrapper
-            //       var randomSample = getRandomElementsFromArray(availableBlocks, 3);
-            //       // clear links wrapper
-            //       populateArenaPopup(linksWrapper, randomSample);
-            //     }
-            //   });
-
-
-
-
-        });
-
-    let availableBlocks = []
-        // this function prefetches all the blocks from arena that will be displayed in popups
-        // so that when someone clicks a blob, no requests to the arena API are needed
+    let availableBlocks = [];
+    // this function prefetches all the blocks from arena that will be displayed in popups
+    // so that when someone clicks a blob, no requests to the arena API are needed
     function getBlocksPool() {
         const listOfChannels = [
             // 'webzine-landscape-blob-pngs',
-            'projects-ephemera',
-            'when-do-you-wish-you-had-not-remained-silent',
-            'what-do-you-need-to-say',
-            'open-questions-pjskriac1oa',
-            'what-are-the-tyrannies-big-and-small-that-you-swallow-day-by-day-and-attempt-to-make-your-own',
-            'if-we-have-been-socialized-to-respect-fear-more-than-our-own-need-for-language-ask-yourself-what-s-the-worst-that-could-happen-t'
+            "projects-ephemera",
+            "when-do-you-wish-you-had-not-remained-silent",
+            "what-do-you-need-to-say",
+            "open-questions-pjskriac1oa",
+            "what-are-the-tyrannies-big-and-small-that-you-swallow-day-by-day-and-attempt-to-make-your-own",
+            "if-we-have-been-socialized-to-respect-fear-more-than-our-own-need-for-language-ask-yourself-what-s-the-worst-that-could-happen-t",
         ];
 
         let completedRequests = 0;
 
         for (let i = 0; i < listOfChannels.length; i++) {
             var channel = listOfChannels[i];
-            var channelUrl = "channels/" + channel + "?per=100"
-            console.log('++ fetching blocks from ' + channel);
-            axiosArena.get(channelUrl).then(response => {
+            var channelUrl = "channels/" + channel + "?per=100";
+            console.log("++ fetching blocks from " + channel);
+            axiosArena.get(channelUrl).then((response) => {
                 // console.log(response);
                 if (response.data && response.data.contents.length > 1) {
                     for (let i = 0; i < response.data.contents.length; i++) {
                         // set the channel title to be part of the block so we can access it later
-                        response.data.contents[i].channelTitle = response.data.title;
-                        response.data.contents[i].channelSlug = response.data.slug;
+                        response.data.contents[i].channelTitle =
+                            response.data.title;
+                        response.data.contents[i].channelSlug =
+                            response.data.slug;
                         // then add it to the queue
-                        availableBlocks.push(response.data.contents[i])
-                            // console.log(availableBlocks);
+                        availableBlocks.push(response.data.contents[i]);
+                        // console.log(availableBlocks);
                     }
                 }
 
@@ -195,11 +186,8 @@ $(document).ready(function() {
                     assignBlocksToCircles();
                 }
             });
-
         }
     }
-
-
 
     function assignBlocksToCircles() {
         // make a function
@@ -213,15 +201,15 @@ $(document).ready(function() {
             // console.log(allCircles[i])
             // console.log(availableBlocks[i])
 
-
             // console.log("=======", availableBlocks[i].channelTitle)
 
             allCircles[i].channelTitle = availableBlocks[i].channelTitle;
             allCircles[i].title = availableBlocks[i].title;
             allCircles[i].desc = availableBlocks[i].description;
-            allCircles[i].content = availableBlocks[i].content
+            allCircles[i].content = availableBlocks[i].content;
+            allCircles[i].id = availableBlocks[i].id;
             if (availableBlocks[i].source != undefined) {
-                allCircles[i].link = availableBlocks[i].source.url
+                allCircles[i].link = availableBlocks[i].source.url;
             } else {
                 allCircles[i].link = "";
             }
@@ -232,26 +220,15 @@ $(document).ready(function() {
                 allCircles[i].image = availableBlocks[i].image.original.url;
             }
 
-
             // console.log(allCircles[i])
-
         }
-
-
-
-
     }
-
 });
-
-
 
 // now availableBlocks is filled with blocks
 
 // -------------------------------
 class Circle {
-
-
     constructor(path) {
         this.x = randomRange(50, 950);
         this.y = randomRange(50, 650);
@@ -262,8 +239,6 @@ class Circle {
         // this.text = "content";
         //add arena caregories here;
     }
-
-
 
     drawCircle(path) {
         //draw ellipse mask shape
@@ -284,17 +259,23 @@ class Circle {
         // for randomness -> set a random chance variable
         // and set if(randomChance < 0.3) do this else do that
 
-        circle.filterWith(function(add) {
+        circle.filterWith(function (add) {
             // add.colorMatrix("hueRotate", 180);
 
-            add.colorMatrix('matrix', [1.0, 0, 0, 0, 0, 0, 0.24, 0, 0, 0, 0, 0, 0.39, 0, 0, 0, 0, 0, 1.0, 0])
+            add.colorMatrix(
+                "matrix",
+                [
+                    1.0, 0, 0, 0, 0, 0, 0.24, 0, 0, 0, 0, 0, 0.39, 0, 0, 0, 0,
+                    0, 1.0, 0,
+                ]
+            );
         });
 
         var self = this;
 
         // arenaBlocks[i].source.url
 
-        circle.on("click", function() {
+        circle.on("click", function () {
             let channel = self.channelTitle;
             let title = self.title;
             let imageUrl = self.image;
@@ -303,32 +284,61 @@ class Circle {
             let url = self.link;
             circleclick = true;
             // let description = this.desc
-            
+
+            // console.log(self.id);
+            // console.log(url);
+
             let n = randomRange(0, allCircles.length - 1);
 
-                if (imageUrl) {
-                    document.querySelector("#info").innerHTML =
-                        "<h3>" + channel + "</h3> <a href='" + url + "' target='_blank'> <h1>" + title + "</h1></a> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
+            if (imageUrl && url) {
+                document.querySelector("#info").innerHTML =
+                    "<button id='close'></button> <h3>" +
+                    channel +
+                    "</h3> <a href='" +
+                    url +
+                    "' target='_blank'> <h1>" +
+                    title +
+                    "</h1></a> <img class='info-image' src=" +
+                    imageUrl +
+                    "> <p> " +
+                    content +
+                    "</p> <p>" +
+                    description +
+                    "</p>";
+            } else if (imageUrl && url == "") {
+                document.querySelector(
+                    "#info"
+                ).innerHTML = `<button id='close'></button><h3>${channel}</h3> <a href="https://www.are.na/block/${self.id}" target="_blank"<h1>${title}</h1></a><img class="info-image" src="${imageUrl}" /> <p>${content}</p> <p>${description}</p> `;
+            } else {
+                document.querySelector("#info").innerHTML =
+                    "<button id='close'></button> <h3>" +
+                    channel +
+                    "</h3> <h1>" +
+                    title +
+                    "</h1> <p> " +
+                    content +
+                    "</p> <p>" +
+                    description +
+                    "</p>";
+            }
 
-                } else {
-                    document.querySelector("#info").innerHTML =
-                        "<h3>" + channel + "</h3> <h1>" + title + "</h1> <p> " + content + "</p> <p>" + description + "</p>";
-                }
-
-                if (imageUrl && url == "") {
-                    document.querySelector("#info").innerHTML =
-                        "<h3>" + channel + "</h3> <h1>" + title + "</h1> <img class='info-image' src=" + imageUrl + "> <p> " + content + "</p> <p>" + description + "</p>";
-                }
+            document
+                .getElementById("close")
+                .addEventListener("click", function (event) {
+                    if (displaying) {
+                        if (!circleclick) {
+                            fade(document.querySelector("#info"));
+                        } else {
+                            circleclick = false;
+                        }
+                    }
+                });
 
             if (!displaying) {
-                
                 unfade(document.querySelector("#info"));
                 circleclick = false;
             }
-
-
         });
-
     }
 
     createLines() {
@@ -338,7 +348,12 @@ class Circle {
 
                 let dist = distance(this.x, this.y, circle.x, circle.y);
                 if (dist > 50 && dist < 150) {
-                    let pathvals = createPath(this.x, this.y, circle.x, circle.y);
+                    let pathvals = createPath(
+                        this.x,
+                        this.y,
+                        circle.x,
+                        circle.y
+                    );
                     let pathstring = makePathString(pathvals);
                     let path = draw.path(pathstring);
 
@@ -352,7 +367,9 @@ class Circle {
 
                     let pathtext = pathSymbols[symbolNum].concat(" ").repeat(5);
 
-                    let textpath = path.text(pathtext.repeat(path.length() / 10)).font({ fill: "#ffffff" });
+                    let textpath = path
+                        .text(pathtext.repeat(path.length() / 10))
+                        .font({ fill: "#ffffff" });
 
                     path.fill("none");
 
@@ -364,7 +381,12 @@ class Circle {
                     });
                     path.stroke("none");
 
-                    let animatedpathvals = createPath(this.x, this.y, circle.x, circle.y);
+                    let animatedpathvals = createPath(
+                        this.x,
+                        this.y,
+                        circle.x,
+                        circle.y
+                    );
 
                     this.lines.push(path);
                     circle.lines.push(path);
@@ -470,12 +492,11 @@ function animateLines(event) {
 }
 
 drawing.addEventListener("mousemove", animateLines, false);
-drawing.addEventListener("click", function(event) {
+drawing.addEventListener("click", function (event) {
     if (displaying) {
         if (!circleclick) {
             fade(document.querySelector("#info"));
-        }
-        else {
+        } else {
             circleclick = false;
         }
     }
@@ -483,7 +504,7 @@ drawing.addEventListener("click", function(event) {
 
 function fade(element) {
     var op = 1; // initial opacity
-    var timer = setInterval(function() {
+    var timer = setInterval(function () {
         if (op <= 0.1) {
             clearInterval(timer);
             element.style.display = "none";
@@ -498,7 +519,7 @@ function fade(element) {
 function unfade(element) {
     var op = 0.1; // initial opacity
     element.style.display = "block";
-    var timer = setInterval(function() {
+    var timer = setInterval(function () {
         if (op >= 1) {
             clearInterval(timer);
             displaying = true;
