@@ -89,7 +89,6 @@ video {
     vertical-align: baseline;
 }
 
-
 /* HTML5 display-role reset for older browsers */
 
 article,
@@ -124,7 +123,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-    content: '';
+    content: "";
     content: none;
 }
 
@@ -137,11 +136,10 @@ a h1:hover {
     color: goldenrod;
 }
 
-
 /* CSS starts from here */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
 h1 {
     font-size: 1.7em;
     margin: 1em 0;
@@ -159,12 +157,12 @@ h3 {
 p {
     font-size: 1em;
     margin: 1em 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: "Space Grotesk", sans-serif;
 }
 
 body {
     /* font-family: "Helvetica Neue", Helvetica, sans-serif; */
-    font-family: 'Space Mono', monospace;
+    font-family: "Space Mono", monospace;
     font-size: 20px;
     color: black;
     background-color: #110000;
@@ -197,7 +195,7 @@ a:hover {
     font-size: 20px;
     position: fixed;
     padding: 20px;
-    margin-top: .3em;
+    margin-top: 0.3em;
 }
 
 #drawing-wrapper {
@@ -251,14 +249,12 @@ i {
 }
 
 #about {
-      font-size: 1.5em;
-      background-color: brown;
-      width: 100vw;
-      POSITION: bottom;
-      top: 100;
-      top: 0;
-      position: fixed;
-      text-align: center;
+    font-size: 1.5em;
+    background-color: brown;
+    width: 100vw;
+    top: 30px;
+    position: fixed;
+    text-align: center;
 }
 
 #about:hover {
@@ -307,7 +303,6 @@ i {
     height: 400px;
 }
 
-
 /* a.block, a.channel {
     cursor: pointer;
     border: none !important;
@@ -331,9 +326,7 @@ i {
     cursor: pointer;
 }
 
-
 /* this will create full screen but cause mouse x and y not working */
-
 
 /* #drawing {
   width: 100vw;
